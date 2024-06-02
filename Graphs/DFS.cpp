@@ -1,34 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 class Graph
 {
 public:
     unordered_map<int, list<int>> adjList;
-    void addEdge(int u, int v, bool direction)
+    void addEdge(int u, int v, int direction)
     {
         adjList[u].push_back(v);
-        if (direction == 0) // Direction = 0 means this is an undirected graph
+        if (direction == 0) // Direction=0 means this is an undirected graph
         {
             adjList[v].push_back(u);
         }
     }
-    void BFS(int src, unordered_map<int, bool> &visited)
+    void DFS(int src, unordered_map<int, bool> &visited)
     {
-        queue<int> q;
-        q.push(src);
+        cout << src << " ";
         visited[src] = true;
-        while (!q.empty())
+        for (auto x : adjList[src])
         {
-            int frontnode = q.front();
-            q.pop();
-            cout << frontnode << " ";
-            for (auto x : adjList[frontnode])
+            if (!visited[x])
             {
-                if (!visited[x])
-                {
-                    q.push(x);
-                    visited[x] = true;
-                }
+                DFS(x, visited);
             }
         }
     }
@@ -45,6 +38,6 @@ int main()
     g.addEdge(5, 6, 1);
     g.addEdge(6, 7, 1);
     unordered_map<int, bool> visited;
-    g.BFS(0, visited);
+    g.DFS(0, visited);
     return 0;
 }
