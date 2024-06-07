@@ -31,7 +31,7 @@ public:
         while (!q.empty()) {
             int size = q.size();
             while (size--) {
-                auto [x, y] = q.front();
+                auto [x,y] = q.front();
                 q.pop();
                 for (auto [dx, dy] : dirs) {
                     int i = x + dx;
